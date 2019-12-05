@@ -65,14 +65,14 @@ def mSimulate1(moptions):
 
       case_sample_num = int(moptions['CaseSize']*(1+moresample*0.02))
       if len(allcasekeys) > case_sample_num:
-          mcase_rand = np.random.choice(len(allcasekeys), case_sample_num), replace=False)
+          mcase_rand = np.random.choice(len(allcasekeys), case_sample_num, replace=False)
           mcase1 = {allcasekeys[x]:moptions['casefolder'][allcasekeys[x]] for x in mcase_rand}
       else:
           mcase1 =  moptions['casefolder']
 
       cont_sample_num = int(moptions['CaseSize']*(1+moresample*0.02))
       if len(allcontkeys) > cont_sample_num:
-          con_random = np.random.choice(len(allcontkeys), cont_sample_num), replace=False)
+          con_random = np.random.choice(len(allcontkeys), cont_sample_num, replace=False)
           mcon1 = {allcontkeys[x]:moptions['controlsample'][allcontkeys[x]] for x in con_random}
       else:
           mcon1 = moptions['controlsample']
