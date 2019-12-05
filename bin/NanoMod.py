@@ -143,11 +143,12 @@ def mDetect(margs):
       parser.print_help();
       parser.parse_args(['detect', '--help']);
       sys.exit(1)
-  
+
    #moptions['checkN'] = 50
 
    moptions['wrkBase1'] = format_last_letter_of_folder(moptions['wrkBase1'])
    moptions['wrkBase2'] = format_last_letter_of_folder(moptions['wrkBase2'])
+   moptions['plotType'] = margs.plotType
 
    printParameters(moptions)
    myDetect.mDetect(moptions)
@@ -188,7 +189,7 @@ def mSimulate(margs):
    moptions['wrkBase2'] = format_last_letter_of_folder(moptions['wrkBase2'])
    if (not moptions["wrkBase3"]==None):
       moptions['wrkBase3'] = format_last_letter_of_folder(moptions['wrkBase3'])
-   
+
    printParameters(moptions)
    mySimulate.mSimulate(moptions)
 
@@ -297,10 +298,10 @@ def mAnnotate(margs):
    moptions['files_per_thread'] = margs.files_per_thread
    if moptions['files_per_thread']<1:
       ErrorMessage = ErrorMessage + ("\n\t The number (%d) of fast5 files per thread is too small" % moptions['files_per_thread'])
-   
+
    moptions['basecall_1d'] = margs.basecall_1d
    moptions['basecall_2strand'] = margs.basecall_2strand
-   moptions['recursive'] = margs.recursive 
+   moptions['recursive'] = margs.recursive
    moptions['alignStr'] = margs.alignStr; #'bwa'
 
    if not ErrorMessage=="":
@@ -356,6 +357,7 @@ parser_detect.add_argument("--Pos", default="", help="The position of interest: 
 #parser_detect.add_argument("--testMethod", default="ks", choices=['fisher', 'stouffer', 'ks'], help="Which method is used for test statistics: fisher, stouffer or KS-test. Leave empty for KS-test.")
 
 parser_detect.add_argument("--wrkBase2", help="The working base folder for the second group.")
+parser_detect.add_argument("--plotType", type=str, default="Density", choices=["Violin", "Density"], help="The type of the plot.")
 
 parser_detect.set_defaults(func=mDetect)
 
@@ -432,4 +434,3 @@ if len(sys.argv)<2:
 else:
    args = parser.parse_args()
    args.func(args);
-
