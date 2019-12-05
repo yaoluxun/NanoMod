@@ -367,7 +367,7 @@ parser_detect.add_argument("--wrkBase2", help="The working base folder for the s
 parser_detect.add_argument("--plotType", type=str, default="Density", choices=["Violin", "Density"], help="The type of the plot.")
 
 parser_detect.add_argument("--downsampling", default=False, action="store_true", help="Whether to perform downsampling.")
-parser_detect.add_argument("--Percentage", type=str, default='0.3', help="The percentages (seperated by ',', for exmaple '0.3,0.2,0.4,0.5,0.1') of reads with modifications. Default: '0.3'.")
+parser_detect.add_argument("--Percentages", type=str, default='0.3', help="The percentages (seperated by ',', for exmaple '0.3,0.2,0.4,0.5,0.1') of reads with modifications. Default: '0.3'.")
 parser_detect.set_defaults(func=mDetect)
 
 parser_simulate = subparsers.add_parser('simulate', parents=[parent_parser], help="Simulate with different percentage of modifications", description="Simulation with different percentage of modifications", epilog="For example, \n \
