@@ -149,7 +149,7 @@ def mDetect(margs):
    moptions['wrkBase1'] = format_last_letter_of_folder(moptions['wrkBase1'])
    moptions['wrkBase2'] = format_last_letter_of_folder(moptions['wrkBase2'])
    moptions['plotType'] = margs.plotType
-
+   moptions['downsampling'] = margs.downsampling
    printParameters(moptions)
    myDetect.mDetect(moptions)
 
@@ -359,6 +359,8 @@ parser_detect.add_argument("--Pos", default="", help="The position of interest: 
 parser_detect.add_argument("--wrkBase2", help="The working base folder for the second group.")
 parser_detect.add_argument("--plotType", type=str, default="Density", choices=["Violin", "Density"], help="The type of the plot.")
 
+parser_detect.add_argument("--downsampling", default=False, action="store_true", help="Whether to perform downsampling.")
+parser_detect.add_argument("--casesize", type=int, default=-1, help="The number of Case Size during downsampling. If not specified, simply return the original datasets.")
 parser_detect.set_defaults(func=mDetect)
 
 parser_simulate = subparsers.add_parser('simulate', parents=[parent_parser], help="Simulate with different percentage of modifications", description="Simulation with different percentage of modifications", epilog="For example, \n \
