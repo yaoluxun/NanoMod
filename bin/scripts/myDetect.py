@@ -520,6 +520,9 @@ def ReadAllFast5(moptions):
 
       f5num = 0;
       f5sub = [cur_wrkBase]
+
+      moptions["count_file"] = 0
+
       while len(f5sub)>0:
          f5subnew = [] #deque() #[]
          if moptions['outLevel']<=OUTPUT_WARNING: print '.sub_fast5_folder', f5sub
@@ -527,14 +530,14 @@ def ReadAllFast5(moptions):
             f5subadd, f5num= readsubfolder(cursub, moptions, f5num, cur_wrkBase_ind, start_time, f5suf)
             f5subnew.extend(f5subadd)
          f5sub = f5subnew
+      print("Number of files in " + str(moptions['cur_wrkBase'])+ "is " + str(moptions["count_file"]))
 
 
 def readsubfolder(cursub, moptions, f5num, cur_wrkBase_ind, start_time, f5suf='.fast5'):
    f5sub = [] #deque() #[]
    f5list = os.listdir(cursub)
    for f5_ind in range(len(f5list)):
-     if moptions['downsampling'] & (np.random.uniform() > moptions['Percentages'][cur_wrkBase_ind]):
-         continue
+
      f5 = f5list[f5_ind]
      if moptions.has_key("checkN") and moptions[moptions['cur_wrkBase']]['norm_mean'].has_key((moptions["Chr"], '-')) and moptions[moptions['cur_wrkBase']]['norm_mean'].has_key((moptions["Chr"], '+')):
         mposkeys1 = moptions[moptions['cur_wrkBase']]['norm_mean'][(moptions["Chr"], '-')].keys();
@@ -543,6 +546,9 @@ def readsubfolder(cursub, moptions, f5num, cur_wrkBase_ind, start_time, f5suf='.
            break;
 
      if f5[-len(f5suf):]==f5suf:
+        if moptions['downsampling'] & (np.random.uniform() > moptions['Percentages'][cur_wrkBase_ind]):
+            continue
+        moptions["count_file"] += 1
         moptions['fast5filename'] = cursub+'/'+f5
         if f5num>0 and f5num%1000==0 and moptions['outLevel']<=OUTPUT_WARNING:
            chrkeys = moptions[moptions['cur_wrkBase']]['norm_mean'].keys(); chrkeys.sort()
