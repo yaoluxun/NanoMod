@@ -95,21 +95,21 @@ def mSimulate1(moptions):
       coverage_list = []
       for cur_wrkBase_ind in range(len(moptions['ds2'])):
          cur_wrkBase = moptions['ds2'][cur_wrkBase_ind]
-      chrstr = moptions[cur_wrkBase]['norm_mean'].keys();
-      for curcs in chrstr:
+         chrstr = moptions[cur_wrkBase]['norm_mean'].keys();
+         for curcs in chrstr:
             if curcs[1] == target_strand and curcs[0]==target_chr:
                for pos in range(target_pos-3, target_pos+4):
                   if len(moptions[cur_wrkBase]['norm_mean'][curcs][pos])<(0.95*moptions['CaseSize']/5):
                      has_enough_coverage_for_region_of_interest += 1;
-		  coverage_list.append('%d:%d' % (pos, len(moptions[cur_wrkBase]['norm_mean'][curcs][pos])))
+                  coverage_list.append('%d:%d' % (pos, len(moptions[cur_wrkBase]['norm_mean'][curcs][pos])))
       if moptions['outLevel']<=OUTPUT_WARNING:
          print rt, 'Coverage list', ' '.join(coverage_list), "o", repeat_time, int(0.95*moptions['CaseSize']/5), has_enough_coverage_for_region_of_interest, cur_repeat_time
          sys.stdout.flush()
       if has_enough_coverage_for_region_of_interest > 2:
          print '\tNo enough coverage', rt
-      if has_enough_coverage_for_region_of_interest > 3 and cur_repeat_time > 5:
+         if has_enough_coverage_for_region_of_interest > 3 and cur_repeat_time > 5:
             repeat_time += 1;
-      cur_repeat_time += 1
+         cur_repeat_time += 1
          continue;
 
       myDetect.mfilter_coverage(moptions)
