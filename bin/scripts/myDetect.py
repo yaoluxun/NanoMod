@@ -533,6 +533,8 @@ def readsubfolder(cursub, moptions, f5num, cur_wrkBase_ind, start_time, f5suf='.
    f5sub = [] #deque() #[]
    f5list = os.listdir(cursub)
    for f5_ind in range(len(f5list)):
+     if moptions['downsampling'] & (np.random.uniform() > moptions['Percentages'][cur_wrkBase_ind]):
+         continue
      f5 = f5list[f5_ind]
      if moptions.has_key("checkN") and moptions[moptions['cur_wrkBase']]['norm_mean'].has_key((moptions["Chr"], '-')) and moptions[moptions['cur_wrkBase']]['norm_mean'].has_key((moptions["Chr"], '+')):
         mposkeys1 = moptions[moptions['cur_wrkBase']]['norm_mean'][(moptions["Chr"], '-')].keys();
