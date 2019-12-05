@@ -377,6 +377,7 @@ def mtest2(moptions):
    ds0 = moptions[moptions['ds2'][0]]
    ds1 = moptions[moptions['ds2'][1]]
 
+   print("Start sorting")
    strandkeys = ds0['norm_mean'].keys(); strandkeys.sort()
    #https://docs.python.org/3/library/collections.html#collections.deque
    #Indexed access is O(1) at both ends but slows to O(n) in the middle. For fast random access, use lists instead
@@ -473,9 +474,10 @@ def mtest2(moptions):
    if moptions['outLevel']<=OUTPUT_DEBUG: print "Info in sign_test", len(moptions['sorted_sign_test'])
 
 def save_test(moptions):
-   #print 'SaveTest',  moptions['SaveTest']
-   if moptions['SaveTest']==0: return;
+   print 'SaveTest',  moptions['SaveTest']
 
+   if moptions['SaveTest']==0: return;
+   print 'Finish SaveTest'
    txtfile = moptions['outFolder'] + '/' + moptions["FileID"] + '_sign_test.txt'
    if moptions['outLevel']<=OUTPUT_ERROR: print 'Test data is saved in', txtfile
    txtwriter = open(txtfile, 'w')
@@ -485,6 +487,7 @@ def save_test(moptions):
          txtwriter.write(' %.3f %.3E\n' % (mostp[1][3][0], mostp[1][3][1]))
       else:
          txtwriter.write('\n')
+   txtwriter.close()
 
 
 def ReadAllFast5(moptions):

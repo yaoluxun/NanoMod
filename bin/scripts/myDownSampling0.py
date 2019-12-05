@@ -68,14 +68,14 @@ def mSimulate1(moptions):
           mcase_rand = np.random.choice(len(allcasekeys), case_sample_num), replace=False);
           mcase1 = {allcasekeys[x]:moptions['casefolder'][allcasekeys[x]] for x in mcase_rand}
       else:
-          mcase1 = {allcasekeys: moptions['casefolder']}
+          mcase1 =  moptions['casefolder']
 
       cont_sample_num = int(moptions['CaseSize']*(1+moresample*0.02)
       if len(allcontkeys) > cont_sample_num:
           con_random = np.random.choice(len(allcontkeys), cont_sample_num), replace=False);
           mcon1 = {allcontkeys[x]:moptions['controlsample'][allcontkeys[x]] for x in con_random}
       else:
-          mcon1 = {allcontkeys: moptions['controlsample']}
+          mcon1 = moptions['controlsample']
 
       if moptions['outLevel']<=OUTPUT_WARNING: #OUTPUT_DEBUG:
          print "randtime, len(case), len(con)) ", rt, len(mcase1), len(mcon1)
@@ -95,8 +95,8 @@ def mSimulate1(moptions):
       coverage_list = []
       for cur_wrkBase_ind in range(len(moptions['ds2'])):
          cur_wrkBase = moptions['ds2'][cur_wrkBase_ind]
-	 chrstr = moptions[cur_wrkBase]['norm_mean'].keys();
-	 for curcs in chrstr:
+      chrstr = moptions[cur_wrkBase]['norm_mean'].keys();
+      for curcs in chrstr:
             if curcs[1] == target_strand and curcs[0]==target_chr:
                for pos in range(target_pos-3, target_pos+4):
                   if len(moptions[cur_wrkBase]['norm_mean'][curcs][pos])<(0.95*moptions['CaseSize']/5):
@@ -107,9 +107,9 @@ def mSimulate1(moptions):
          sys.stdout.flush()
       if has_enough_coverage_for_region_of_interest > 2:
          print '\tNo enough coverage', rt
-	 if has_enough_coverage_for_region_of_interest > 3 and cur_repeat_time > 5:
+      if has_enough_coverage_for_region_of_interest > 3 and cur_repeat_time > 5:
             repeat_time += 1;
-	 cur_repeat_time += 1
+      cur_repeat_time += 1
          continue;
 
       myDetect.mfilter_coverage(moptions)
