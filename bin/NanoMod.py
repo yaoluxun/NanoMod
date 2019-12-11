@@ -150,13 +150,14 @@ def mDetect(margs):
    moptions['wrkBase2'] = format_last_letter_of_folder(moptions['wrkBase2'])
    moptions['plotType'] = margs.plotType
    moptions['downsampling'] = margs.downsampling
-   moptions['Percentages'] = margs.Percentages.split(',')
-   for ipind in range(len(moptions['Percentages'])):
-      moptions['Percentages'][ipind] = float(moptions['Percentages'][ipind])
-      if moptions['Percentages'][ipind]<10**-5:
-         ErrorMessage = ErrorMessage + ("\n\tThe Percentage (%.6f) is too small or large than %.6f" % (moptions['Percentages'][ipind], 10**-5))
-      if int(moptions['Percentages'][ipind]) >= 1:
-          moptions['Percentages'][ipind] = 1.1
+   if moptions['downsampling']:
+       moptions['Percentages'] = margs.Percentages.split(',')
+       for ipind in range(len(moptions['Percentages'])):
+           moptions['Percentages'][ipind] = float(moptions['Percentages'][ipind])
+           if moptions['Percentages'][ipind]<10**-5:
+               ErrorMessage = ErrorMessage + ("\n\tThe Percentage (%.6f) is too small or large than %.6f" % (moptions['Percentages'][ipind], 10**-5))
+               if int(moptions['Percentages'][ipind]) >= 1:
+                   moptions['Percentages'][ipind] = 1.1
    printParameters(moptions)
    myDetect.mDetect(moptions)
 

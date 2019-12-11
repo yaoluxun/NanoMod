@@ -546,8 +546,8 @@ def readsubfolder(cursub, moptions, f5num, cur_wrkBase_ind, start_time, f5suf='.
            break;
 
      if f5[-len(f5suf):]==f5suf:
-        if 'Percentages' in moptions.keys():
-           if moptions['downsampling'] & (np.random.uniform() > moptions['Percentages'][cur_wrkBase_ind]):
+        if moptions['downsampling'] & ('Percentages' in moptions.keys()):
+           if np.random.uniform() > moptions['Percentages'][cur_wrkBase_ind]:
                continue
         moptions["count_file"] += 1
         moptions['fast5filename'] = cursub+'/'+f5
