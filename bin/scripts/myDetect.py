@@ -307,7 +307,7 @@ def m_max_float(fv):
       return sys.float_info.max
    else: return fv
 
-def getUtest(a, b):
+def getKStest(moptions, a, b):
   st, pu = mannwhitneyu(a, b)
   pu = m_min_float(pu)
   stu = m_max_float(st);
@@ -316,9 +316,26 @@ def getUtest(a, b):
   pt = m_min_float(pt)
   stt = m_max_float(st);
 
-  st, pks = ks_2samp(a, b)
-  pks = m_min_float(pks)
-  stks = m_max_float(st);
+  cov = moptions['coverage']
+  if(cov <= 0 || (len(a) <= cov && len(b) <= cov)):
+    st, pks = ks_2samp(a, b) #no st return median
+    pks = m_min_float(pks)
+    stks = m_max_float(st);
+
+  else:
+    p_array = np.zeros(100)
+    st_array = np.zeros(100)
+    for i in range(100):
+      if(len(a) > cov):
+        a = np.random.choice(a, cov)
+      if(len(b) > cov):
+        b = np.random.choice(b, cov)
+      st, pks = ks_2samp(a, b)
+      p_array[i] = m_min_float(pks)
+      st_array[i] = m_max_float(st)
+    ind = np.argsort(p_array)[50]
+    pks = p_array[ind]
+    stks = st_array[ind]
 
   return [(stu, pu), (stt, pt), (stks, pks)]
 
@@ -392,7 +409,7 @@ def mtest2(moptions):
                    if moptions['outLevel']<=OUTPUT_ERROR:
                       print 'Error not equal', sk, pk, ds1['base'][sk][pk], ds0['base'][sk][pk], ds1['basedict'][sk][pk].items(), ds0['basedict'][sk][pk].items()
                 #moptions['sign_test'].append([(sk[0], sk[1], pk, ds1['base'][sk][pk]), getUtest(ds0['norm_mean'][sk][pk], ds1['norm_mean'][sk][pk])])
-                moptions['sign_test'].append(((sk[0], sk[1], pk, ds1['base'][sk][pk]), getUtest(ds0['norm_mean'][sk][pk], ds1['norm_mean'][sk][pk])))
+                moptions['sign_test'].append(((sk[0], sk[1], pk, ds1['base'][sk][pk]), getKStest(moptions, ds0['norm_mean'][sk][pk], ds1['norm_mean'][sk][pk])))
    end_time = time.time();
    if moptions['outLevel']<=OUTPUT_INFO: print ("Producing pvalues: consuming time %d" % (end_time-start_time))
 

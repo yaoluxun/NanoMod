@@ -158,6 +158,8 @@ def mDetect(margs):
                ErrorMessage = ErrorMessage + ("\n\tThe Percentage (%.6f) is too small or large than %.6f" % (moptions['Percentages'][ipind], 10**-5))
                if int(moptions['Percentages'][ipind]) >= 1:
                    moptions['Percentages'][ipind] = 1.1
+
+   moptions['coverage'] = margs.coverage
    printParameters(moptions)
    myDetect.mDetect(moptions)
 
@@ -369,6 +371,7 @@ parser_detect.add_argument("--plotType", type=str, default="Density", choices=["
 
 parser_detect.add_argument("--downsampling", default=False, action="store_true", help="Whether to perform downsampling.")
 parser_detect.add_argument("--Percentages", type=str, default='0.3', help="The percentages (seperated by ',', for exmaple '0.3,0.2,0.4,0.5,0.1') of reads with modifications. Default: '0.3'.")
+parser_detect.add_argument("--coverage", type=float, default='0', help="The coverage threshold. DownSampling will be preformed if the covrage of a site is over the threshold. Default: '0'(no downsampling)")
 parser_detect.set_defaults(func=mDetect)
 
 parser_simulate = subparsers.add_parser('simulate', parents=[parent_parser], help="Simulate with different percentage of modifications", description="Simulation with different percentage of modifications", epilog="For example, \n \
