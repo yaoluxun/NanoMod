@@ -264,10 +264,9 @@ def getMove_Info(moptions, sp_param, move_data):
     #sp_param['duration_template'] = sp_param['f5reader']['/Analyses/Segmentation_001/Summary/segmentation'].attrs['duration_template']
 
    seg = "Segmentation_" + moptions['basecall_1d'].split('_')[-1]
-   if moptions['multi']:
-      attr_path = '/'.join(['', sp_param['read_id'], 'Analyses', seg, 'Summary', 'segmentation'])
-   else:
-      attr_path = '/'.join(['', 'Analyses', seg, 'Summary', 'segmentation'])
+
+
+   attr_path = '/'.join(['', 'Analyses', seg, 'Summary', 'segmentation'])
     #mv_str = '/'.join(['', 'Analyses', moptions['basecall_1d'], moptions['basecall_2strand'], 'Move'])
    sp_param['first_sample_template'] = sp_param['f5reader'][attr_path].attrs['first_sample_template']
    sp_param['duration_template'] = sp_param['f5reader'][attr_path].attrs['duration_template']
