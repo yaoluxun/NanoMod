@@ -83,11 +83,11 @@ dftmargin = 0.1
       grid.arrange(volinplot, pvs[[1]], ncol = 1, heights=c(2,1));
     }
   }
-  } else{   
+  } else{
   print("In density Plot") #Density Plot
-    
+
     plotDat$Base <- str_extract(as.character(plotDat$Position),"[ATCG]" )
-    
+
     plotDat$Location <- strsplit(as.character(plotDat$Position), "/") %>% do.call("rbind", .) %>% .[,1] %>% as.numeric()
     kspv <- strsplit(as.character(plotDat$Position), "\n") %>% do.call("rbind", .) %>% .[,2] %>% as.numeric()
     cpv <-  strsplit(as.character(plotDat$Position), "\n") %>% do.call("rbind", .) %>% .[,3] %>% as.numeric()
@@ -139,7 +139,8 @@ dftmargin = 0.1
           panel.grid.major.x=element_blank(),
           panel.grid.minor.x=element_blank(),
           panel.grid.minor.y=element_blank(),
-          axis.title.x=element_blank(),axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           plot.margin=unit(c(0.1,1.0,0.1,0.4), "cm"),
           axis.title.y=element_text(size=7)) +
@@ -174,7 +175,6 @@ dftmargin = 0.1
       ylab("log10(Comb Pv)") + xlab("Position")
     print(head(normDensDat))
     grid.arrange(p, ks_p, cs_p, ncol = 1)
-   
+
   }
 }
-
