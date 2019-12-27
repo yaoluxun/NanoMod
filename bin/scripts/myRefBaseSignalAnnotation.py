@@ -130,7 +130,10 @@ def getEvent(moptions, sp_param):
   if sp_param['f5status'] == "":
      sp_param['events_data'] = events_data
      if sp_param['basecaller'] == 'Guppy': #use move table
-        sp_param['fq_seq'] = sp_param['f5reader'][myCom.analyses_base][myCom.basecall_1D_base][myCom.basecall_template_base][myCom.basecall_fastq_base][()].split("\n")
+        fq_path = ''.join([fast5_analysis,'/',moptions['basecall_1d'],'/',moptions['basecall_2strand'],'/',fast5_basecall_fq])
+        fq_data = sp_param['f5reader'][fq_path][()]
+        fq_data = (fq_data.decode(encoding="utf-8")).split('\n')
+        sp_param['fq_seq'] = fq_data[1]
 
         sp_param['m_event'] = getMove_Info(moptions, sp_param, events_data)
         sp_param['m_event_basecall'] = sp_param['fq_seq']
