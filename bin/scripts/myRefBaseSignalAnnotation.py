@@ -120,7 +120,7 @@ def getEvent(moptions, sp_param):
         event_path = ''.join([fast5_analysis, '/', moptions['basecall_1d'], '/', moptions['basecall_2strand'], '/', fast5_move])
      else:
         event_path = ''.join([fast5_analysis, '/', moptions['basecall_1d'], '/', moptions['basecall_2strand'], '/', fast5_events])
-     events_data = sp_param['f5reader'][event_path].value
+     events_data = sp_param['f5reader'][event_path][()]
   except:
      raiseError('No events/move data', sp_param, "No events/move data")
      return;
@@ -303,6 +303,10 @@ def getMove_Info(moptions, sp_param, move_data):
    move_info[seg_count]['stdv'] = np.std(sp_param['raw_signals'][pivot:nsig])
    move_info[seg_count]['start'] = pivot
    move_info[seg_count]['model_state'] = sp_param['fq_seq'][seg_count-2:seg_count+1] + 'N'*2
+
+   #############################################################
+
+
    return move_info
 
 def getRawInfo(moptions, sp_param):
