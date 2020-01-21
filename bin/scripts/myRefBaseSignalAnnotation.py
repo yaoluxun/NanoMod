@@ -1439,6 +1439,8 @@ def correctAndAnnotate_manager(moptions):
    if moptions['recursive']==1:
       #f5files = glob.glob(os.path.join(moptions['wrkBase1'],"*/*.fast5" ))
       f5files.extend(glob.glob(os.path.join(moptions['wrkBase1'],"*/*.fast5" )))
+      f5files.extend(glob.glob(os.path.join(moptions['wrkBase'],"*/*/*.fast5" )))
+      f5files.extend(glob.glob(os.path.join(moptions['wrkBase'],"*/*/*/*.fast5" )))
    #else: f5files = glob.glob(os.path.join(moptions['wrkBase1'],"*.fast5" ))
    #f5files = ['tofixerror/VAIODG_20170628_FNFAH09129_MN19183_mux_scan_TrainSeq3_Bio_pur_SpeI_cut_31257_ch166_read31_strand.fast5']
    #f5files = ['SingleModDs/IdU/ds400/26/VAIODG_20170809_FNFAH20109_MN19183_mux_scan_TrainSeq3_IdU_SpeI_cut_96151_ch473_read32_strand.fast5']
