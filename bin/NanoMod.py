@@ -437,7 +437,7 @@ parser_annotate.add_argument("--basecall_2strand", default="BaseCalled_template"
 parser_annotate.add_argument("--MinNumSignal", type=int, default=4, help="Mininum number of signals for an event. Default:4")
 parser_annotate.add_argument("--recursive", type=int, default=1, choices=[0,1], help="Recurise to find fast5 files. Default:0")
 parser_annotate.add_argument("--alignStr", type=str, default='bwa', choices=["bwa","minimap2"], help="Alignment tools (bwa or minimap2 is supported). Default: bwa")
-parser_annotate.add_argument("--continue", default=False, action="store_true", type=str, default='bwa',  help="Continue performing annotation")
+#parser_annotate.add_argument("--continue", default=False, action="store_true", type=str, default='bwa',  help="Continue performing annotation")
 
 parser_annotate.set_defaults(func=mAnnotate);
 
