@@ -316,7 +316,7 @@ def getKStest(moptions, a, b):
   pt = m_min_float(pt)
   stt = m_max_float(st);
 
-  cov = moptions['coverage']
+  cov = int(moptions['coverage'])
   if(cov <= 0 or (len(a) <= cov and len(b) <= cov)):
     st, pks = ks_2samp(a, b) #no st return median
     pks = m_min_float(pks)
