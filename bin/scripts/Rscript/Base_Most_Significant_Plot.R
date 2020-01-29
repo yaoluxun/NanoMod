@@ -94,10 +94,12 @@ dftmargin = 0.1
 
     kspv <- strsplit(as.character(plotDat$Position), "\n")
     kspv <- do.call("rbind", kspv)
-    kspv <- kspv[,2] %>% as.numeric()
+    kspv <- kspv[,2]
+    kspv <- as.numeric(kspv)
     cpv <-  strsplit(as.character(plotDat$Position), "\n")
     cpv <- do.call("rbind", cpv)
-    cpv <- cpv[,3] %>% as.numeric()
+    cpv <- cpv[,3]
+    cpv <- as.numeric(cpv)
     plotDat$kspv <- log10(kspv)
     plotDat$cpv <- log10(cpv)
     pvpltDat <- plotDat[!duplicated(plotDat[,'Location']),]
