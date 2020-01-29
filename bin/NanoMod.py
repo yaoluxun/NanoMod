@@ -313,7 +313,7 @@ def mAnnotate(margs):
    moptions['basecall_2strand'] = margs.basecall_2strand
    moptions['recursive'] = margs.recursive
    moptions['alignStr'] = margs.alignStr; #'bwa'
-   moptions['continue'] = margs.continue
+   #moptions['continue'] = margs.continue
    if not ErrorMessage=="":
       ErrorMessage = "Please provide correct parameters" + ErrorMessage
       print ErrorMessage, '\n'
