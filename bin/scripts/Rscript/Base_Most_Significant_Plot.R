@@ -88,9 +88,16 @@ dftmargin = 0.1
 
     plotDat$Base <- str_extract(as.character(plotDat$Position),"[ATCG]" )
 
-    plotDat$Location <- strsplit(as.character(plotDat$Position), "/") %>% do.call("rbind", .) %>% .[,1] %>% as.numeric()
-    kspv <- strsplit(as.character(plotDat$Position), "\n") %>% do.call("rbind", .) %>% .[,2] %>% as.numeric()
-    cpv <-  strsplit(as.character(plotDat$Position), "\n") %>% do.call("rbind", .) %>% .[,3] %>% as.numeric()
+    plotDat$Location <- strsplit(as.character(plotDat$Position), "/")
+    plotDat$Location <- do.call("rbind", plotDat$Location)
+    plotDat$Location <- plotDat$Location[,1] %>% as.numeric()
+
+    kspv <- strsplit(as.character(plotDat$Position), "\n")
+    kspv <- do.call("rbind", kspv)
+    kspv <- kspv[,2] %>% as.numeric()
+    cpv <-  strsplit(as.character(plotDat$Position), "\n")
+    cpv <- do.call("rbind", cpv)
+    cpv <- cpv[,3] %>% as.numeric()
     plotDat$kspv <- log10(kspv)
     plotDat$cpv <- log10(cpv)
     pvpltDat <- plotDat[!duplicated(plotDat[,'Location']),]
