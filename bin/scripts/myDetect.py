@@ -327,10 +327,10 @@ def getKStest(moptions, a, b):
     st_array = np.zeros(100)
     for i in range(100):
       if(len(a) > cov):
-        a = np.random.choice(a, cov)
+        a_temp = np.random.choice(a, cov)
       if(len(b) > cov):
-        b = np.random.choice(b, cov)
-      st, pks = ks_2samp(a, b)
+        b_temp = np.random.choice(b, cov)
+      st, pks = ks_2samp(a_temp, b_temp)
       p_array[i] = m_min_float(pks)
       st_array[i] = m_max_float(st)
     ind = np.argsort(p_array)[50]
