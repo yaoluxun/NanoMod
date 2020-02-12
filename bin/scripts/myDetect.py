@@ -328,8 +328,12 @@ def getKStest(moptions, a, b):
     for i in range(100):
       if(len(a) > cov):
         a_temp = np.random.choice(a, cov)
+      else:
+        a_temp = a
       if(len(b) > cov):
         b_temp = np.random.choice(b, cov)
+      else:
+        b_temp = b
       st, pks = ks_2samp(a_temp, b_temp)
       p_array[i] = m_min_float(pks)
       st_array[i] = m_max_float(st)
